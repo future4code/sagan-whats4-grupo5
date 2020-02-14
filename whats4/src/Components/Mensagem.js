@@ -44,10 +44,11 @@ class Mensagem extends React.Component {
             excluir: 0
         }
     }
-    
+    //onDoubleClick
+    //onClick={this.props.apagar}
     render() {
         return (
-            <Main onClick={this.props.apagar}>
+            <Main onDoubleClick={this.props.apagar}>
                 <FotoPerfil src={this.props.fotoPerfil} />
                 <Nome>{this.props.usuario}:</Nome>
                 <MensagemTexto>
