@@ -19,7 +19,7 @@ justify-content: flex-end;
 background-color: #E7E7E7;
 `
 
-const FormularioStyle = styled.form`
+const FormularioStyle = styled.div`
 width: 55%;
 display: flex;
 border: solid 1px black;
@@ -44,9 +44,10 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            listaDeMensagem: [],
+            listaDeMensagemDados: [],
+            listaDeMensagens: [],
             inputNome: "",
-            InputMensagem: ""
+            inputMensagem: ""
         }
     }
 
@@ -59,33 +60,59 @@ class App extends React.Component {
 
     inputMensagemControlado = (e) => {
         this.setState({
-            InputMensagem: e.target.value
+            inputMensagem: e.target.value
         })
+        if(e.keyCode === "enter"){
+            console.log("popo")
+            this.enviar()
+        }
     }
 
 
-    enviar(e) {
+    enviar = (e) => {
+        
         const mensagemAuxiliar = {
-            usuario: this.state.inputUsuarioControlado,
-            mensagem: this.state.inputMensagemControlado
+            usuario: this.state.inputNome,
+            mensagem: this.state.inputMensagem
         }
+        let listaAuxiliar = this.state.listaDeMensagemDados
+        listaAuxiliar.push(mensagemAuxiliar)
+        this.setState({
+            listaDeMensagemDados: listaAuxiliar
+        })
 
-        // let listaDeMensagemAuxiliar = listaDeMensagem.map((elemento)=>{
-        //     return()
+        listaAuxiliar = this.state.listaDeMensagemDados.map((elemento, index)=>{
+         return (<Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" 
+         usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} onClick={deletar}/>)   
+        })
+         this.setState({
+             listaDeMensagem: listaAuxiliar
+         })
+        //     return(<Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" 
+        //     usuario={elemento.usuario} mensagem={elemento.mensagem} />)
+        // })
+        
+    }
+
+    deletar = (index) => {
+        console.log("kvhkgvkhgv")
+        // this.setState({
+        //     excluir: this.state.excluir + 1
         // })
     }
 
 
     render() {
+            
         return (
             <Aplicativo>
                 <MensagensDiv>
-                    <Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" usuario="Usuario" mensagem="Oi, tudo bem?" />
+                {this.state.listaDeMensagem}
                 </MensagensDiv>
                 <FormularioStyle>
-                    <InputNomeUsuario type="text" placeholder="Usuário" onChange={this.inputUsuarioControlado} value={this.state.inputUsuario} />
+                    <InputNomeUsuario type="text" placeholder="Usuário" onChange={this.inputNomeControlado} value={this.state.inputNome} />
                     <InputMensagem type="text" placeholder="Mensagem" onChange={this.inputMensagemControlado} value={this.state.InputMensagem} />
-                    <ButtonEnviar onClick={this.enviar} >Enviar</ButtonEnviar>
+                    <ButtonEnviar onClick={this.enviar}>Enviar</ButtonEnviar>
                 </FormularioStyle>
             </Aplicativo>
         )
@@ -93,3 +120,5 @@ class App extends React.Component {
 }
 
 export default App
+
+/* <Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" usuario="" mensagem="" /> */
