@@ -37,9 +37,11 @@ margin-left: 1%;
 class Mensagem extends React.Component {
     constructor(props){
         super(props)
+        
 
         this.state = {
-            eu: false
+            eu: false,
+            excluir: 0
         }
     }
     
