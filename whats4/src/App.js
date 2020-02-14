@@ -62,7 +62,7 @@ class App extends React.Component {
         this.setState({
             inputMensagem: e.target.value
         })
-        if(e.keyCode === "enter"){
+        if (e.keyCode === "enter") {
             console.log("popo")
             this.enviar()
         }
@@ -70,7 +70,7 @@ class App extends React.Component {
 
 
     enviar = (e) => {
-        
+
         const mensagemAuxiliar = {
             usuario: this.state.inputNome,
             mensagem: this.state.inputMensagem
@@ -81,37 +81,66 @@ class App extends React.Component {
             listaDeMensagemDados: listaAuxiliar
         })
 
-        listaAuxiliar = this.state.listaDeMensagemDados.map((elemento, index)=>{
-         return (<Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" 
-         usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} onClick={deletar}/>)   
+        //onClick={()=>console.log("uehhhh")}
+        console.log("entrou aqui de novo para renderizar")
+        listaAuxiliar = this.state.listaDeMensagemDados.map((elemento, index) => {
+            return (<Mensagem apagar={() => { this.apagar(index) }} indice={index} fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg"
+                usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} />)
         })
-         this.setState({
-             listaDeMensagem: listaAuxiliar
-         })
-        //     return(<Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" 
-        //     usuario={elemento.usuario} mensagem={elemento.mensagem} />)
-        // })
-        
+        this.setState({
+            listaDeMensagem: listaAuxiliar
+        })
+
+        this.setState({
+            inputNome: "",
+            inputMensagem: ""
+        })
     }
 
-    deletar = (index) => {
-        console.log("kvhkgvkhgv")
-        // this.setState({
-        //     excluir: this.state.excluir + 1
-        // })
+    verificaEnter = (e) =>{
+        if (e.keyCode === 13){
+            this.enviar()
+
+        }
+
+    }
+
+
+    apagar = (index) => {
+        const indice = index
+        let listaAuxiliar = this.state.listaDeMensagemDados
+        console.log(indice)
+        console.log(this.state.listaDeMensagemDados)
+        console.log(listaAuxiliar)
+        listaAuxiliar.splice(indice, 1)
+        console.log("Retirou")
+        console.log(listaAuxiliar)
+
+        this.setState({
+            listaDeMensagemDados: listaAuxiliar
+        })
+
+
+        listaAuxiliar = this.state.listaDeMensagemDados.map((elemento, index) => {
+            return (<Mensagem apagar={() => { this.apagar(index) }} indice={index} fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg"
+                usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} />)
+        })
+        this.setState({
+            listaDeMensagem: listaAuxiliar
+        })
     }
 
 
     render() {
-            
+
         return (
             <Aplicativo>
                 <MensagensDiv>
-                {this.state.listaDeMensagem}
+                    {this.state.listaDeMensagem}
                 </MensagensDiv>
                 <FormularioStyle>
                     <InputNomeUsuario type="text" placeholder="Usuário" onChange={this.inputNomeControlado} value={this.state.inputNome} />
-                    <InputMensagem type="text" placeholder="Mensagem" onChange={this.inputMensagemControlado} value={this.state.InputMensagem} />
+                    <InputMensagem type="text" placeholder="Mensagem" onChange={this.inputMensagemControlado} onKeyDown={this.verificaEnter} value={this.state.InputMensagem} />
                     <ButtonEnviar onClick={this.enviar}>Enviar</ButtonEnviar>
                 </FormularioStyle>
             </Aplicativo>
