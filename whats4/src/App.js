@@ -1,25 +1,58 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+// import Formulario from './Formulario/Formulario'
+import styled from 'styled-components';
+
+const ContainerGeral = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`
+const Containerform = styled.div`
+width: 50%
+`
+
+const FormularioStyle = styled.form`
+width: 100%;
+display: flex;
+border: solid 1px black;
+`
+const InputNomeUsuario = styled.input`
+width:15%;
+margin: 5px
+`
+const InputMensagem = styled.input`
+width:70%;
+margin: 5px;
+`
+const ButtonEnviar = styled.button`
+width: 15%;
+margin: 5px
+`
+
+class Formulario extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    
+    render(){
+        return(
+            <Containerform>
+            <FormularioStyle>
+            <InputNomeUsuario type="text" placeholder="Usuário"/>
+            <InputMensagem type="text" placeholder="Mensagem"/>
+            <ButtonEnviar>Enviar</ButtonEnviar>
+            </FormularioStyle>
+            </Containerform>
+        )
+    }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContainerGeral>
+    <Formulario />
+    </ContainerGeral>
   );
 }
 
