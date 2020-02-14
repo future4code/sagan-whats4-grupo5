@@ -46,9 +46,8 @@ class Mensagem extends React.Component {
     }
     
     render() {
-
         return (
-            <Main>
+            <Main onClick={this.props.apagar}>
                 <FotoPerfil src={this.props.fotoPerfil} />
                 <Nome>{this.props.usuario}:</Nome>
                 <MensagemTexto>
