@@ -8,33 +8,57 @@ const Aplicativo = styled.div`
     display:flex;
     flex-direction:column;
     align-items: center;
+    background-color:grey;
 `
 const MensagensDiv = styled.div`
 border: 1px solid black;
-height: 94vh;
+height: 100vh;
 width: 55%;
 display: flex;
 flex-direction:column;
 justify-content: flex-end;
 background-color: #E7E7E7;
+box-shadow: 0px 1px 5px 0px black;
 `
 
 const FormularioStyle = styled.div`
-width: 55%;
+width: 100%;
 display: flex;
-border: solid 1px black;
+height: 40px;
+margin-bottom: 1%;
+margin-top: 1%;
 `
 const InputNomeUsuario = styled.input`
 width:15%;
-margin: 5px;
+border-radius: 8px;
+margin-left: 1%;
+padding-left: 5px;
+box-shadow: 0px 1px 5px 0px black;
+::placeholder {
+    width: 100%;
+    padding-left: 5px;
+};
+
 `
 const InputMensagem = styled.input`
 width:70%;
-margin: 5px;
+border-radius: 8px;
+margin-left: 1%;
+padding-left: 5px;
+box-shadow: 0px 1px 5px 0px black;
+::placeholder {
+    width: 100%;
+    padding-left: 5px;
+};
 `
 const ButtonEnviar = styled.button`
 width: 15%;
-margin: 5px;
+height: 100%;
+border-radius: 8px;
+margin-left: 1%;
+margin-right: 1%;
+box-shadow: 0px 1px 5px 0px black;
+font-weight: bold;
 `
 
 
@@ -77,8 +101,7 @@ class App extends React.Component {
             listaDeMensagemDados: listaAuxiliar
         })
         listaAuxiliar = this.state.listaDeMensagemDados.map((elemento, index) => {
-            return (<Mensagem apagar={() => { this.apagar(index) }} indice={index} fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg"
-                usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} />)
+            return (<Mensagem apagar={() => { this.apagar(index) }} indice={index} usuario={elemento.usuario} mensagem={elemento.mensagem} key={index} />)
         })
         this.setState({
             listaDeMensagem: listaAuxiliar
@@ -93,7 +116,6 @@ class App extends React.Component {
     verificaEnter = (e) =>{
         if (e.keyCode === 13){
             this.enviar()
-
         }
 
     }
@@ -129,18 +151,16 @@ class App extends React.Component {
         return (
             <Aplicativo>
                 <MensagensDiv>
-                    {this.state.listaDeMensagem}
+                     {this.state.listaDeMensagem}
+                     <FormularioStyle>
+                        <InputNomeUsuario type="text" placeholder="Usuário" onChange={this.inputNomeControlado} value={this.state.inputNome} />
+                        <InputMensagem type="text" placeholder="Mensagem" onChange={this.inputMensagemControlado} onKeyDown={this.verificaEnter} value={this.state.inputMensagem} />
+                        <ButtonEnviar onClick={this.enviar}>Enviar</ButtonEnviar>
+                    </FormularioStyle>
                 </MensagensDiv>
-                <FormularioStyle>
-                    <InputNomeUsuario type="text" placeholder="Usuário" onChange={this.inputNomeControlado} value={this.state.inputNome} />
-                    <InputMensagem type="text" placeholder="Mensagem" onChange={this.inputMensagemControlado} onKeyDown={this.verificaEnter} value={this.state.inputMensagem} />
-                    <ButtonEnviar onClick={this.enviar}>Enviar</ButtonEnviar>
-                </FormularioStyle>
             </Aplicativo>
         )
     }
 }
 
 export default App
-
-/* <Mensagem fotoPerfil="https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg" usuario="" mensagem="" /> */

@@ -2,35 +2,39 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Main = styled.div`
-border: 1px solid grey;
-border-radius: 10px;
 display:flex;
+width:100%;
+justify-content: ${ props=>props.lado};
+`
+
+const Lado = styled.div`
+display:block;
+border: 1px solid grey;
+border-radius: 5px;
 margin: 0;
 width:50%;
 background-color: #D0CFC8;
 margin-left: 1%;
 margin-bottom: 1%;
-`
-
-const FotoPerfil = styled.img`
-width: 40px;
-height: 40px;
-margin-left: 1%;
-margin-top: 1%;
-margin-bottom: 1%;
-border-radius: 50%;
+margin-right: 1%;
+padding-top:3%;
+padding-bottom:3%;
+box-shadow: 0px 1px 5px 0px black;
 `
 
 const MensagemTexto = styled.div`
 margin-top: auto;
 margin-bottom:auto;
-margin-left: 15px;
+margin-left: 3%;
 `
 
 const Nome = styled.p`
-margin-left: 1%;
+margin-left: 3%;
+margin-top: 0;
+margin-bottom: 0;
+font-weight: bold;
+display: ${props=>props.lado};
 `
-
 
 
 
@@ -44,16 +48,29 @@ class Mensagem extends React.Component {
             excluir: 0
         }
     }
-    //onDoubleClick
-    //onClick={this.props.apagar}
     render() {
         return (
-            <Main onDoubleClick={this.props.apagar}>
-                <FotoPerfil src={this.props.fotoPerfil} />
-                <Nome>{this.props.usuario}:</Nome>
-                <MensagemTexto>
-                    {this.props.mensagem}
-                </MensagemTexto>
+            <Main onDoubleClick={this.props.apagar} lado={(props)=>{
+                if(this.props.usuario==="eu"){
+                    return "flex-end"
+                }
+                else{
+                    return "flex-start"
+                }
+            }}>
+                <Lado>
+                    <Nome lado={(props)=>{
+                if(this.props.usuario==="eu"){
+                    return "none"
+                }
+                else{
+                    return "block"
+                }
+            }} >{this.props.usuario}</Nome>
+                    <MensagemTexto>
+                        {this.props.mensagem}
+                    </MensagemTexto>
+                </Lado>
             </Main>
         )
     }
