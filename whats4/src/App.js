@@ -9,6 +9,7 @@ const Aplicativo = styled.div`
     flex-direction:column;
     align-items: center;
     background-color:grey;
+    font-family: 'Roboto Mono', monospace;
 `
 const MensagensDiv = styled.div`
 border: 1px solid black;
@@ -60,8 +61,11 @@ height: 100%;
 border-radius: 8px;
 margin-left: 1%;
 margin-right: 1%;
-box-shadow: 0px 1px 5px 0px black;
+box-shadow: 1px 1px 1px 0px black;
 font-weight: bold;
+:hover{
+    background-color: #BEBEBE;
+};
 `
 
 
@@ -153,6 +157,7 @@ class App extends React.Component {
 
         return (
             <Aplicativo>
+                <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"></link>
                 <MensagensDiv>
                      {this.state.listaDeMensagem}
                      <FormularioStyle>

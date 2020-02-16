@@ -11,25 +11,25 @@ const Lado = styled.div`
 display:block;
 border: 1px solid grey;
 border-radius: 5px;
-margin: 0;
-width:50%;
 background-color: #D0CFC8;
-margin-left: 1%;
 margin-bottom: 1%;
 margin-right: 1%;
+margin-left: 1%;
+padding-left: 1%;
+padding-right: 1%;
 padding-top:3%;
 padding-bottom:3%;
 box-shadow: 0px 1px 5px 0px black;
 `
 
 const MensagemTexto = styled.div`
+width: 100%;
 margin-top: auto;
 margin-bottom:auto;
-margin-left: 3%;
 `
 
 const Nome = styled.p`
-margin-left: 3%;
+width: 100%;
 margin-top: 0;
 margin-bottom: 0;
 font-weight: bold;
