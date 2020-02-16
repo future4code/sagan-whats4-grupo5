@@ -19,6 +19,9 @@ flex-direction:column;
 justify-content: flex-end;
 background-color: #E7E7E7;
 box-shadow: 0px 1px 5px 0px black;
+@media (max-width: 480px) {
+    width: 100%;
+}
 `
 
 const FormularioStyle = styled.div`
